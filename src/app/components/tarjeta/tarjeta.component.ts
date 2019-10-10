@@ -10,5 +10,4 @@ export class TarjetaComponent{
   @Input() items: any[] = [];
 
   constructor(){ }
-
 }

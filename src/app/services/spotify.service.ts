@@ -7,8 +7,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SpotifyService {
-    
-  token:string = 'BQCY46w9axUoZIDHmj3gGHJwFEfbOIp3wFIcf0_CdaB0jlFeCE70xrNktSWIUVvGeULLxBD5sRtOt1p_Ohw';
+  
+  //Este token esxpira cada hora   
+  token:string = 'BQCNW5c61S53SWANP0RoaWO_ygweHaFUvix9q0Y0KzTeCQddc6IHNReyxZMdlbihtmnCQxOSgvcEl3Z0Ec4';
 
   constructor( private http: HttpClient ){}
   
@@ -22,13 +23,22 @@ export class SpotifyService {
     return this.http.get( url, { headers } );
   }
 
-  getNewReleases(){
-    
+  getNewReleases(){    
     return this.getQuery( "browse/new-releases?limit=15" ).pipe( map( data => data['albums'].items ) )
   }
 
-  getArtista( termino:string ){
+  getArtistas( termino:string ){
     
     return this.getQuery( `search?q=${termino}&type=artist&limit=15` ).pipe( map( data => data['artists'].items ) )
   }
+
+  getArtista( id:string ){
+    
+    return this.getQuery( `artists/${id}` ); //.pipe( map( data => data['artists'].items ) )
+  }
+
+  getTopTracks( id:string ){
+    return this.getQuery( `artists/${id}/top-tracks?country=us` ).pipe( map( data =>  data['tracks'] ) );
+  }
+     
 }

@@ -11,7 +11,7 @@ export class ArtistaComponent {
   
   artista:any = {}; 
   loading: boolean;
-  topTracks: any = {}
+  topTracks: any = []
 
   constructor ( private router:ActivatedRoute, private spotify: SpotifyService ) {
     this.loading = true;

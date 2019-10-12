@@ -10,8 +10,12 @@ export class SearchComponent {
   
   list:any[] = [];
   loading:boolean;
+  error: boolean;
+  mensaje:string;
 
-  constructor( private spotify: SpotifyService ){ }
+  constructor( private spotify: SpotifyService ){
+    this.error = false;
+  }
 
   buscar( termino: string ){
     if( termino == "" ){
@@ -23,8 +27,14 @@ export class SearchComponent {
 
     this.spotify.getArtistas( termino ).subscribe(
       ( data: any ) => {
+        
         this.list = data;
         this.loading = false;
+
+      }, ( errorServicio ) => {
+        this.loading = false;
+        this.error = true;
+        this.mensaje = errorServicio.error.error.message;
       }
     );
   }

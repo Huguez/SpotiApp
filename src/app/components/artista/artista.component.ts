@@ -34,7 +34,6 @@ export class ArtistaComponent {
   getTopTracks( id: string ){
     this.spotify.getTopTracks( id ).subscribe( (toptracks : any) => {
       this.topTracks = toptracks;
-      console.log( this.topTracks );
     })
   }
 
